@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
+from fastapi.responses import JSONResponse
 from typing import Optional
 from pydantic import BaseModel
 
@@ -12,6 +13,10 @@ class Package(BaseModel):
 @app.get('/')
 async def hello_world():
     return {"hello": "world"}
+
+@app.get('/test')
+async def hello_world():
+    return JSONResponse(status_code=status.HTTP_204_NO_CONTENT)
 
 
 @app.get('/component/{component_id}') #path parameter
